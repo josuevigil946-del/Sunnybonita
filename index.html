@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Feliz San Valentín ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: black;
+    font-family: Arial, sans-serif;
+}
+
+/* Botón */
+#playBtn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#playBtn:hover {
+    background: #ff1f4d;
+}
+
+/* Texto flotante */
+.word {
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    animation: float 20s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-100vh);
+        opacity: 1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<button id="playBtn">▶ Reproducir música</button>
+
+<audio id="music" loop>
+    <source src="Juan_Luis_Guerra_Mi_Bendicion.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const music = document.getElementById("music");
+const btn = document.getElementById("playBtn");
+
+let playing = false;
+
+btn.addEventListener("click", () => {
+    if (!playing) {
+        music.play();
+        btn.textContent = "⏸ Pausar música";
+        playing = true;
+    } else {
+        music.pause();
+        btn.textContent = "▶ Reproducir música";
+        playing = false;
+    }
+});
+
+
+// MUCHAS palabras 💖
+const words = [
+"Te amo ❤️","Mi amor 💕","Eres mi vida 🌹","Mi cielo ✨","Mi princesa 👑",
+"Mi bendición 💖","Mi todo 💘","Mi corazón 💓","Mi estrella 🌟","Te adoro 😍",
+"Eres única 💎","Mi felicidad 😊","Mi razón ❤️","Mi sueño 💫","Mi sol ☀️",
+"Mi luna 🌙","Mi universo 🌌","Siempre juntos 💑","Amor eterno ♾️",
+"Mi inspiración ✍️","Mi tesoro 💍","Mi regalo 🎁","Mi alegría 😘",
+"Mi paz 🕊️","Mi sonrisa 😁","Mi destino 💞","Mi mundo 🌍",
+"Contigo siempre 💕","Te necesito ❤️","Mi reina 👑","Mi cielo azul 💙",
+"Mi flor 🌸","Mi magia ✨","Mi razón de vivir 💖","Mi para siempre ♾️",
+"Mi hermosa 😍","Mi fuerza 💪❤️","Mi motivación 🚀","Mi universo 💫",
+"Mi luz 💡","Mi fe 💝","Mi angel 😇","Mi esperanza 🌈",
+"Mi refugio 🏡❤️","Mi ilusión 💗","Mi todo todo 💘","Mi sueño eterno 🌠"
+];
+
+function createWord() {
+    const word = document.createElement("div");
+    word.className = "word";
+
+    word.textContent = words[Math.floor(Math.random() * words.length)];
+
+    word.style.left = Math.random() * window.innerWidth + "px";
+    word.style.fontSize = (14 + Math.random() * 20) + "px";
+    word.style.animationDuration = (15 + Math.random() * 15) + "s";
+
+    document.body.appendChild(word);
+
+    setTimeout(() => {
+        word.remove();
+    }, 30000);
+}
+
+// MUCHAS palabras constantemente
+setInterval(createWord, 300);
+
+</script>
+
+</body>
+</html>
